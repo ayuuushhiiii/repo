@@ -21,3 +21,14 @@ variable "instance_type" {
 variable "subnet1_tf" {
   type = string
 }
+variable "instance_name" {
+  description = "name"
+  type= string
+  default = ""
+}
+variable "tags" {
+  description = "Additional tags for EC2"
+  type        = map(string)
+  default     = {}
+}
+
