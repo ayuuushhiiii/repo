@@ -3,33 +3,68 @@ name: Terraform CI/CD
 on:
   push:
     branches:
-      - main   # run when you push to main branch
+      - main
   pull_request:
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      # Checkout repo
+      - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Setup Terraform
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.6
 
-      - name: Init & Apply VPC
-        working-directory: ./CICD/VPC_module
-        run: |
-          terraform init
-          terraform apply -auto-approve
+      # -------------------------
+      # VPC Module
+      # -------------------------
+      - name: Terraform Init (VPC)
+        working-directory: CICD/VPC_module
+        run: terraform init
 
-      - name: Init & Apply Subnet
-        working-directory: ./CICD/SUBNET_module
-        run: |
-          terraform init
-          terraform apply -auto-approve
+      - name: Terraform Plan (VPC)
+        working-directory: CICD/VPC_module
+        run: terraform plan
 
-      - name: Init & Apply EC2
-        working-directory: ./CICD/EC2_module
-        run: |
-          terraform init
-          terraform apply -auto-approve
+      - name: Terraform Apply (VPC)
+        if: github.ref == 'refs/heads/main'
+        working-directory: CICD/VPC_module
+        run: terraform apply -auto-approve
+
+      # -------------------------
+      # SUBNET Module
+      # -------------------------
+      - name: Terraform Init (Subnet)
+        working-directory: CICD/SUBNET_module
+        run: terraform init
+
+      - name: Terraform Plan (Subnet)
+        working-directory: CICD/SUBNET_module
+        run: terraform plan
+
+      - name: Terraform Apply (Subnet)
+        if: github.ref == 'refs/heads/main'
+        working-directory: CICD/SUBNET_module
+        run: terraform apply -auto-approve
+
+      # -------------------------
+      # EC2 Module
+      # -------------------------
+      - name: Terraform Init (EC2)
+        working-directory: CICD/EC2_module
+        run: terraform init
+
+      - name: Terraform Plan (EC2)
+        working-directory: CICD/EC2_module
+        run: terraform plan
+
+      - name: Terraform Apply (EC2)
+        if: github.ref == 'refs/heads/main'
+        working-directory: CICD/EC2_module
+        run: terraform apply -auto-approve
