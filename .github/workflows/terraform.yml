@@ -1,19 +1,14 @@
-name: Terraform
+name: Terraform CI/CD
 
 on:
   push:
     branches:
-      - main
+      - main   # run when you push to main branch
   pull_request:
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: .
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -21,11 +16,20 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Init
-        run: terraform init
+      - name: Init & Apply VPC
+        working-directory: ./CICD/VPC_module
+        run: |
+          terraform init
+          terraform apply -auto-approve
 
-      - name: Terraform Validate
-        run: terraform validate
+      - name: Init & Apply Subnet
+        working-directory: ./CICD/SUBNET_module
+        run: |
+          terraform init
+          terraform apply -auto-approve
 
-      - name: Terraform Plan
-        run: terraform plan
+      - name: Init & Apply EC2
+        working-directory: ./CICD/EC2_module
+        run: |
+          terraform init
+          terraform apply -auto-approve
