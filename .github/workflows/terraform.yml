@@ -3,7 +3,7 @@ name: Terraform CI/CD
 on:
   push:
     branches:
-      - main
+      - main   # Run on push to main branch
   pull_request:
 
 jobs:
@@ -11,52 +11,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      # Step 1: Checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
+      # Step 2: Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          terraform_version: 1.5.0   # or the version you use
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1   # ✅ Correct region
 
-      # ---------------- VPC ----------------
-      - name: Terraform Init (VPC)
-        working-directory: VPC_module
-        run: terraform init
+      # Step 3: Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Plan (VPC)
-        working-directory: VPC_module
-        run: terraform plan
+      # Step 4: Init & Apply VPC
+      - name: Init & Apply VPC
+        working-directory: ./CICD/VPC_module
+        run: |
+          terraform init -backend-config="region=us-east-1"
+          terraform apply -auto-approve
 
-      - name: Terraform Apply (VPC)
-        if: github.ref == 'refs/heads/main'
-        working-directory: VPC_module
-        run: terraform apply -auto-approve
+      # Step 5: Init & Apply Subnet
+      - name: Init & Apply Subnet
+        working-directory: ./CICD/SUBNET_module
+        run: |
+          terraform init -backend-config="region=us-east-1"
+          terraform apply -auto-approve
 
-      # ---------------- SUBNET ----------------
-      - name: Terraform Init (Subnet)
-        working-directory: SUBNET_module
-        run: terraform init
-
-      - name: Terraform Plan (Subnet)
-        working-directory: SUBNET_module
-        run: terraform plan
-
-      - name: Terraform Apply (Subnet)
-        if: github.ref == 'refs/heads/main'
-        working-directory: SUBNET_module
-        run: terraform apply -auto-approve
-
-      # ---------------- EC2 ----------------
-      - name: Terraform Init (EC2)
-        working-directory: EC2_module
-        run: terraform init
-
-      - name: Terraform Plan (EC2)
-        working-directory: EC2_module
-        run: terraform plan
-
-      - name: Terraform Apply (EC2)
-        if: github.ref == 'refs/heads/main'
-        working-directory: EC2_module
-        run: terraform apply -auto-approve
+      # Step 6: Init & Apply EC2
+      - name: Init & Apply EC2
+        working-directory: ./CICD/EC2_module
+        run: |
+          terraform init -backend-config="region=us-east-1"
+          terraform apply -auto-approve
