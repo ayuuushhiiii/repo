@@ -24,20 +24,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Init & Apply VPC
-        working-directory: ./VPC_module
+      - name: Terraform init
         run: |
           terraform init
-          terraform apply -auto-approve
+      - name: Terraform Plan
+        run: |
+          terraform plan
 
-      - name: Init & Apply Subnet
-        working-directory: ./SUBNET_module
+      - name: Terraform apply --auto-approve
         run: |
-          terraform init
-          terraform apply -auto-approve
-
-      - name: Init & Apply EC2
-        working-directory: ./EC2_module
-        run: |
-          terraform init
           terraform apply -auto-approve

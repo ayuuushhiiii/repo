@@ -1,34 +1,21 @@
-variable "region" {
-  description = "instance will be deployed in which region"
+ variable "ami_id"{
+   description = "this is ami id"
+ }
+ variable "instance_type_value" {
+    description = "size of instance"
+ }
+ variable "subnet_id" {
+  description = "value of subnet id"
   default = ""
   type = string
-}
-variable "ami_id" {
-  description = "instance image"
-  default = ""
+ }
+ variable "instance_name"{
+  description = "name of server"
+  default = null
   type = string
-}
-variable "Name" {
-  description = "name of instance"
-  default = ""
-  type = string
-}
-variable "instance_type" {
-  description = "size of instance"
-  default = ""
-  type = string
-}
-variable "subnet1_tf" {
-  type = string
-}
-variable "instance_name" {
-  description = "name"
-  type= string
-  default = ""
-}
-variable "tags" {
-  description = "Additional tags for EC2"
-  type        = map(string)
-  default     = {}
-  }
-
+ }
+ variable "tags" {
+   description = "add key value pairs to identify the resources"
+   type = map(string)
+   default = {}
+ }

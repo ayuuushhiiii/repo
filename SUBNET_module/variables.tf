@@ -1,18 +1,15 @@
-variable "region" {
-  description = "region of the resource deployment"
+variable "vpc_id" {
+  description = "id of VPC"
   default = ""
   type = string
 }
-variable "subnet1_tf" {
-  description = "range of subnet1"
+variable "cidr_block" {
+  description = "range of CIDR"
   default = ""
   type = string
 }
-variable "subnet2_tf" {
-  description = "range of subnet2"
+variable "aws_region" {
+  description = "region of VPC"
   default = ""
   type = string
-}
-variable "vpc_id"{
-  type= string
 }

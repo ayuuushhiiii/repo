@@ -1,19 +1,8 @@
 provider "aws" {
-  region = var.region
+  region = var.aws_region
 }
-# first subnet
-resource "aws_subnet" "subnet1_tf" {
+resource "aws_subnet" "this" {
   vpc_id     = var.vpc_id
-  cidr_block = var.subnet1_tf
-  tags = {
-    Name = "subnet-1_git"
-  }
-}
+  cidr_block = var.cidr_block
 
-resource "aws_subnet" "subnet2_tf" {
-  vpc_id     = var.vpc_id
-  cidr_block = var.subnet2_tf
-  tags = {
-    Name = "subnet-2_git"
-  }
 }
