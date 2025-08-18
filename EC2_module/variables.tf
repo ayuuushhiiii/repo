@@ -18,3 +18,6 @@ variable "instance_type" {
   default = ""
   type = string
 }
+variable "subnet1_tf" {
+  type = string
+}
