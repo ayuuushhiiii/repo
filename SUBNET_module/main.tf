@@ -10,7 +10,7 @@ resource "aws_subnet" "subnet1_tf" {
   }
 }
 # second subnet
-resource "aws_subnet" "subnet1_tf" {
+resource "aws_subnet" "subnet2_tf" {
   vpc_id = aws_vpc.vpc_tf
   cidr_block = var.subnet2_tf
   tags = {
