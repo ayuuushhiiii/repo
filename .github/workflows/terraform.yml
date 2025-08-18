@@ -3,7 +3,7 @@ name: Terraform CI/CD
 on:
   push:
     branches:
-      - main   # Run on push to main branch
+      - main
   pull_request:
 
 jobs:
@@ -11,39 +11,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repo
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # Step 2: Configure AWS credentials
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1   # ✅ Correct region
-
-      # Step 3: Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # Step 4: Init & Apply VPC
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
       - name: Init & Apply VPC
-        working-directory: ./CICD/VPC_module
+        working-directory: ./VPC_module
         run: |
-          terraform init -backend-config="region=us-east-1"
+          terraform init
           terraform apply -auto-approve
 
-      # Step 5: Init & Apply Subnet
       - name: Init & Apply Subnet
-        working-directory: ./CICD/SUBNET_module
+        working-directory: ./SUBNET_module
         run: |
-          terraform init -backend-config="region=us-east-1"
+          terraform init
           terraform apply -auto-approve
 
-      # Step 6: Init & Apply EC2
       - name: Init & Apply EC2
-        working-directory: ./CICD/EC2_module
+        working-directory: ./EC2_module
         run: |
-          terraform init -backend-config="region=us-east-1"
+          terraform init
           terraform apply -auto-approve
