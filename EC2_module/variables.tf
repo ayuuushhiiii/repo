@@ -30,5 +30,5 @@ variable "tags" {
   description = "Additional tags for EC2"
   type        = map(string)
   default     = {}
-}
+  }
 
