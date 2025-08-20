@@ -6,5 +6,6 @@ instance_type = "t3.micro"
 instance_name = "server_3"
 aws_region = "us-east-1"
 vpc_name = "vpc_git"
+sg_name = "security_group"
 
 

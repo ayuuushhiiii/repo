@@ -27,5 +27,10 @@ module "ec2_instance" {
    ami_id = var.ami_id
    instance_name = var.instance_name
 }
+module "ec2_sg" {
+  source = "./SG_module"
+  sg_name = var.sg_name
+  vpc_id = module.vpc_creation.vpc_id
+}
 
 

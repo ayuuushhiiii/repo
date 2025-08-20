@@ -43,3 +43,8 @@ variable "vpc_name"{
   default = ""
   type = string
 }
+variable "sg_name" {
+  description = "name of security group"
+  default = ""
+  type = string
+}
