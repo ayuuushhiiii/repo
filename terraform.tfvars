@@ -7,6 +7,9 @@ instance_name = "server-github"
 aws_region = "us-east-1"
 vpc_name = "vpc_git"
 sg_name = "security_group"
+subnet1_git = "subnet1_git"
+subnet2_git = "subnet2_git"
+
 
 
 

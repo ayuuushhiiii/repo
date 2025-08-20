@@ -48,3 +48,13 @@ variable "sg_name" {
   default = ""
   type = string
 }
+variable "subnet1_git" {
+  description = "subnet 1 name"
+  default = ""
+  type = string
+}
+variable "subnet2_git" {
+  description = "subnet2 name"
+  default = ""
+  type = string
+}

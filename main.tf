@@ -14,12 +14,14 @@ module "subnet1_creation" {
   vpc_id = module.vpc_creation.vpc_id
   cidr_block = var.cidr_block_1
   aws_region = var.aws_region
+  subnet_name = var.subnet1_git
 }
 module "subnet2_creation" {
   source = "./SUBNET_module"
   vpc_id = module.vpc_creation.vpc_id
   cidr_block = var.cidr_block_2
   aws_region = var.aws_region
+  subnet_name = var.subnet2_git
 }
 module "ec2_instance" {
     source = "./EC2_module"
