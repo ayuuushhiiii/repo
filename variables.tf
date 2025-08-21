@@ -58,3 +58,8 @@ variable "subnet2_git" {
   default = ""
   type = string
 }
+variable "ig_name" {
+  description = "ig name"
+  default = ""
+  type = string
+}

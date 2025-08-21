@@ -9,7 +9,7 @@ vpc_name = "vpc_git"
 sg_name = "security_group"
 subnet1_git = "subnet1_git"
 subnet2_git = "subnet2_git"
-
+ig_name = "internet gateway"
 
 
 

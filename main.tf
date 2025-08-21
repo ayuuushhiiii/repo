@@ -36,6 +36,11 @@ module "ec2_instance" {
    subnet_id = module.subnet1_creation.subnet_id
    sg_id = module.ec2_sg.sg_id
 }
+module "ig_creation" {
+  source = "./IG_module"
+  vpc_id = module.vpc_creation.vpc_id
+  ig_name =  var.ig_name
+}
 
 
 
