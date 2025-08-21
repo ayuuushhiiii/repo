@@ -6,4 +6,7 @@ resource "aws_instance" "server_tf" {
   tags = merge({
     Name = var.instance_name
   }, var.tags)
+  lifecycle {
+    create_before_destroy = true
+  }
 }
