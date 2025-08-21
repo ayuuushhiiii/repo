@@ -19,3 +19,8 @@
    type = map(string)
    default = {}
  }
+ variable "sg_id" {
+   description = "security group id"
+   default = ""
+   type = string
+ }

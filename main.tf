@@ -29,6 +29,7 @@ module "ec2_instance" {
    ami_id = var.ami_id
    instance_name = var.instance_name
    subnet_id = module.subnet1_creation.subnet_id
+   sg_id = module.ec2_sg.sg_id
 }
 module "ec2_sg" {
   source = "./SG_module"
