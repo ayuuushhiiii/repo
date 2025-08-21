@@ -23,6 +23,11 @@ module "subnet2_creation" {
   aws_region = var.aws_region
   subnet_name = var.subnet2_git
 }
+module "ec2_sg" {
+  source = "./SG_module"
+  sg_name = var.sg_name
+  vpc_id = module.vpc_creation.vpc_id
+}
 module "ec2_instance" {
     source = "./EC2_module"
    instance_type_value = var.instance_type
@@ -31,10 +36,6 @@ module "ec2_instance" {
    subnet_id = module.subnet1_creation.subnet_id
    sg_id = module.ec2_sg.sg_id
 }
-module "ec2_sg" {
-  source = "./SG_module"
-  sg_name = var.sg_name
-  vpc_id = module.vpc_creation.vpc_id
-}
+
 
 
