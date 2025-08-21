@@ -44,7 +44,7 @@ module "ig_creation" {
 module "route_table_creation" {
   source = "./ROUTETABLE_module"
   cidr_block = var.cidr_block_1
-  gateway_id = module.IG_module.ig_id
+  gateway_id = module.ig_creation.ig_id
   route_name = var.route_name
   vpc_id = module.vpc_creation.vpc_id
   subnet_id = module.subnet1_creation.subnet_id
