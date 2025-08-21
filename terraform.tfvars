@@ -10,6 +10,7 @@ sg_name = "security_group"
 subnet1_git = "subnet1_git"
 subnet2_git = "subnet2_git"
 ig_name = "internet gateway"
+route_name = "route_table"
 
 
 
