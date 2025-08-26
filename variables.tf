@@ -65,5 +65,6 @@ variable "ig_name" {
 }
 variable "route_name" {
   default = ""
+  type = string
   description = "name of route table"
 }
