@@ -47,7 +47,11 @@ module "route_table_creation" {
   gateway_id = module.ig_creation.ig_id
   route_name = var.route_name
   vpc_id = module.vpc_creation.vpc_id
+}
+resource "aws_route_table_association" "route_tf" {
+  route_table_id = module.route_table_creation.id
   subnet_id = module.subnet1_creation.subnet_id
-  }
+}
+
 
 

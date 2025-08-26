@@ -27,7 +27,3 @@ variable "route_name" {
   description = "Name tag for the route table"
   type        = string
 }
-variable "subnet_id" {
-  description = "subnet range"
-  type = string
-}
