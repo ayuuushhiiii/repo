@@ -68,3 +68,13 @@ variable "route_name" {
   type = string
   description = "name of route table"
 }
+variable "name_lb" {
+  default = ""
+  description = "name of lb"
+  type = string
+}
+variable "sg_id" {
+  default = ""
+  description = "id of sg"
+  type = string
+}

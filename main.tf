@@ -52,6 +52,13 @@ resource "aws_route_table_association" "route_tf" {
   route_table_id = module.route_table_creation.route_table_id
   subnet_id = module.subnet1_creation.subnet_id
 }
+module "gateway_creation" {
+  source = "./LB_module"
+  subnet_id = module.subnet1_creation.sg_id
+  name_lb = var.name_lb
+  sg_id = var.sg_id
+
+}
 
 
 
