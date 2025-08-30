@@ -7,11 +7,11 @@ resource "aws_lb" "tf_lb" {
 
   enable_deletion_protection = true
 
-  access_logs {
-    bucket  = aws_s3_bucket.lb_logs.id
-    prefix  = "test-lb"
-    enabled = true
-  }
+#   access_logs {
+#     bucket  = aws_s3_bucket.lb_logs.id
+#     prefix  = "test-lb"
+#     enabled = true
+#   }
 
   tags = {
     Environment = "production"
