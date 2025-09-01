@@ -5,7 +5,7 @@ variable "sg_id" {
 }
 variable "subnet_ids" {
   description = "id of subnet"
-  default = ""
+  #default = ""
   type = list(string)
 }
 variable "name_lb" {
