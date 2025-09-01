@@ -3,10 +3,10 @@ variable "sg_id" {
   type = string
   default = ""
 }
-variable "subnet_id" {
+variable "subnet_ids" {
   description = "id of subnet"
   default = ""
-  type = string
+  type = list(string)
 }
 variable "name_lb" {
   description = "name of load balancer"

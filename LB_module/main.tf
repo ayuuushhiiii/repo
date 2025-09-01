@@ -3,7 +3,7 @@ resource "aws_lb" "tf_lb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [var.sg_id]
-  subnets            = var.subnet_id
+  subnets        = var.subnet_ids
 
   enable_deletion_protection = true
 
